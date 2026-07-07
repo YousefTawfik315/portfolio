@@ -945,3 +945,35 @@ body {
     transform: scale(1.12);
     box-shadow: 0 8px 20px rgba(37,211,102,.35);
 }
+/* Fix mobile navbar overlap */
+@media (max-width: 991px) {
+
+    .navbar {
+        height: auto;
+        padding: 15px 0;
+    }
+
+    .navbar-collapse {
+        background: #ffffff;
+        padding: 20px;
+        margin-top: 15px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .navbar-nav {
+        gap: 10px;
+    }
+
+    .nav-link {
+        padding: 10px 0;
+    }
+
+    .nav-link::after {
+        display: none;
+    }
+
+    .hero-section {
+        padding-top: 120px;
+    }
+}
