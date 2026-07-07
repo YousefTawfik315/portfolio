@@ -921,3 +921,27 @@ body {
     }
 
 }
+.whatsapp-btn{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+    background: #f0f0f0;
+    color: #fff;
+
+    text-decoration: none;
+    font-size: 18px;
+
+    transition: all .3s ease;
+}
+
+.whatsapp-btn:hover{
+    background: #1ebe5d;
+    color: #fff;
+    transform: scale(1.12);
+    box-shadow: 0 8px 20px rgba(37,211,102,.35);
+}
