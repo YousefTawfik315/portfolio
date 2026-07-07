@@ -945,7 +945,10 @@ body {
     transform: scale(1.12);
     box-shadow: 0 8px 20px rgba(37,211,102,.35);
 }
-/* Fix mobile navbar overlap */
+/* ==========================
+   Mobile Navbar
+========================== */
+
 @media (max-width: 991px) {
 
     .navbar {
@@ -953,20 +956,31 @@ body {
         padding: 15px 0;
     }
 
+    .navbar > .container {
+        align-items: flex-start;
+    }
+
     .navbar-collapse {
-        background: #ffffff;
-        padding: 20px;
+        width: 100%;
+        display: none;
+        background: #fff;
         margin-top: 15px;
+        padding: 15px;
         border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+
+    .navbar-collapse.show {
+        display: block;
     }
 
     .navbar-nav {
-        gap: 10px;
+        width: 100%;
+        gap: 8px;
     }
 
     .nav-link {
-        padding: 10px 0;
+        padding: 12px 0;
     }
 
     .nav-link::after {
@@ -974,6 +988,7 @@ body {
     }
 
     .hero-section {
-        padding-top: 120px;
+        padding-top: 110px;
     }
+
 }
