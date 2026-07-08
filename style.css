@@ -78,7 +78,22 @@ body.show-glow::before {
         transform: translateY(0px);
     }
     50% {
-        transform: translateY(-15px);
+        transform: translateY(-25px);
+    }
+}
+
+@keyframes floatProfile {
+    0%, 100% {
+        transform: translateY(0px) scale(1);
+    }
+    25% {
+        transform: translateY(-20px) scale(1.02);
+    }
+    50% {
+        transform: translateY(-30px) scale(1.03);
+    }
+    75% {
+        transform: translateY(-15px) scale(1.02);
     }
 }
 
@@ -343,7 +358,7 @@ section.in-view::before {
     transform: translate(-50%, -50%);
     filter: blur(25px);
     z-index: -1;
-    animation: float 4s ease-in-out infinite;
+    animation: floatProfile 4s ease-in-out infinite;
 }
 
 .profile-img {
@@ -353,12 +368,13 @@ section.in-view::before {
     border-radius: 50%;
     border: 8px solid #ffffff;
     box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-    animation: float 3s ease-in-out infinite;
+    animation: floatProfile 4s ease-in-out infinite;
     transition: all 0.3s ease;
 }
 
 .profile-img:hover {
     box-shadow: 0 25px 70px rgba(37, 99, 235, 0.25);
+    animation: none;
 }
 
 /* ==================== SKILLS SECTION ==================== */

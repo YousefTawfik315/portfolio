@@ -1,3 +1,29 @@
+// ==================== PROFILE IMAGE FLOATING ANIMATION ====================
+document.addEventListener('DOMContentLoaded', function() {
+    const profileImg = document.querySelector('.profile-img');
+
+    if (profileImg) {
+        // Ensure the floating animation is applied
+        profileImg.style.animation = 'floatProfile 4s ease-in-out infinite';
+
+        // Add hover effect to pause animation
+        profileImg.addEventListener('mouseenter', function() {
+            this.style.animation = 'none';
+        });
+
+        profileImg.addEventListener('mouseleave', function() {
+            this.style.animation = 'floatProfile 4s ease-in-out infinite';
+        });
+    }
+
+    // Also animate the wrapper background
+    const profileWrapper = document.querySelector('.profile-wrapper');
+    if (profileWrapper) {
+        const beforeElement = profileWrapper.querySelector('::before');
+        profileWrapper.style.setProperty('--float-animation', 'floatProfile 4s ease-in-out infinite');
+    }
+});
+
 // ==================== CURSOR GLOW EFFECT ====================
 const body = document.body;
 let mouseX = 0;
@@ -28,6 +54,20 @@ style.textContent = `
         left: var(--mouse-x, 0);
         top: var(--mouse-y, 0);
         transform: translate(-50%, -50%);
+    }
+
+    /* Ensure floating animation is always active */
+    .profile-img {
+        animation: floatProfile 4s ease-in-out infinite !important;
+    }
+
+    .profile-wrapper::before {
+        animation: floatProfile 4s ease-in-out infinite !important;
+    }
+
+    /* Stop animation on hover */
+    .profile-img:hover {
+        animation: none !important;
     }
 `;
 document.head.appendChild(style);
