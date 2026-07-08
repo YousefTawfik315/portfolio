@@ -151,8 +151,9 @@ body.show-glow::before {
     color: #6f7080;
     font-size: 17px;
     position: relative;
-    transition: 0.3s;
+    transition: all 0.3s ease;
     animation: slideDown 0.6s ease-out both;
+    font-weight: 500;
 }
 
 .nav-link:nth-child(1) { animation-delay: 0.1s; }
@@ -163,6 +164,12 @@ body.show-glow::before {
 
 .nav-link:hover {
     color: #050516;
+}
+
+.nav-link.active {
+    color: #2563eb;
+    font-weight: 700;
+    text-shadow: 0 0 1px rgba(37, 99, 235, 0.3);
 }
 
 .nav-link::after {
@@ -177,6 +184,10 @@ body.show-glow::before {
 }
 
 .nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link.active::after {
     width: 100%;
 }
 

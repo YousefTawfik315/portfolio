@@ -63,10 +63,16 @@ document.addEventListener('DOMContentLoaded', function() {
         reveals.forEach(element => {
             const windowHeight = window.innerHeight;
             const elementTop = element.getBoundingClientRect().top;
+            const elementBottom = element.getBoundingClientRect().bottom;
             const elementVisible = 150;
 
-            if (elementTop < windowHeight - elementVisible) {
+            // When element comes into view
+            if (elementTop < windowHeight - elementVisible && elementBottom > 0) {
                 element.classList.add('active');
+            }
+            // When element leaves view (remove and re-add for animation replay)
+            else if (elementTop > windowHeight || elementBottom < 0) {
+                element.classList.remove('active');
             }
         });
     };
@@ -77,9 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add reveal class for animation
     reveals.forEach(el => {
-        if (!el.classList.contains('active')) {
-            el.classList.add('reveal');
-        }
+        el.classList.add('reveal');
     });
 });
 
@@ -115,26 +119,47 @@ window.addEventListener('scroll', function() {
 
 // ==================== ACTIVE NAVBAR LINK ====================
 const navLinks = document.querySelectorAll('.nav-link');
-const sections = document.querySelectorAll('section');
+const allSections = document.querySelectorAll('section');
 
-window.addEventListener('scroll', () => {
+function updateActiveNav() {
     let current = '';
-    sections.forEach(section => {
+    let maxOffset = -1;
+
+    allSections.forEach(section => {
         const sectionTop = section.offsetTop;
-        if (pageYOffset >= sectionTop - 200) {
-            current = section.getAttribute('id');
+        const sectionId = section.getAttribute('id');
+
+        // If section is above current scroll position, consider it
+        if (window.pageYOffset >= sectionTop - 100) {
+            if (sectionTop > maxOffset) {
+                maxOffset = sectionTop;
+                current = sectionId;
+            }
         }
     });
 
     navLinks.forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + current) {
-            link.style.color = '#2563eb';
-        } else {
-            link.style.color = '';
-        }
     });
-});
+
+    // Set active link
+    if (current) {
+        const activeLink = document.querySelector(`.nav-link[href="#${current}"]`);
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
+    }
+}
+
+// Update frequently on scroll for smooth transitions
+window.addEventListener('scroll', updateActiveNav, { passive: true });
+
+// Update on page load
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateActiveNav);
+} else {
+    updateActiveNav();
+}
 
 // ==================== BUTTON HOVER EFFECTS ====================
 const buttons = document.querySelectorAll('.download-btn');
