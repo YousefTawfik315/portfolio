@@ -1,3 +1,223 @@
+// ==================== PROJECT DEMO VIDEO MODAL ====================
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('videoModal');
+    const video = document.getElementById('demoVideo');
+    const closeBtn = document.querySelector('.video-modal-close');
+    const demoButtons = document.querySelectorAll('.project-demo-btn');
+
+    if (!modal || !video) return;
+
+    function openVideo(src) {
+        video.src = src;
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        video.play().catch(() => { /* autoplay blocked — user can press play */ });
+    }
+
+    function closeVideo() {
+        video.pause();
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+        // Release the file after the closing animation
+        setTimeout(() => { video.removeAttribute('src'); video.load(); }, 350);
+    }
+
+    demoButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const src = btn.dataset.video;
+            if (src) openVideo(src);
+        });
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', closeVideo);
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal || e.target.classList.contains('video-modal-inner')) {
+            closeVideo();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) closeVideo();
+    });
+});
+
+// ==================== CERTIFICATES CAROUSEL ====================
+document.addEventListener('DOMContentLoaded', function() {
+    const track = document.getElementById('certificateTrack');
+    if (!track) return;
+
+    const carousel = document.getElementById('certificatesCarousel');
+    const cards = Array.from(track.querySelectorAll('.certificate-card'));
+    const dotsContainer = document.getElementById('certificateDots');
+    const prevBtn = document.querySelector('.cert-nav-prev');
+    const nextBtn = document.querySelector('.cert-nav-next');
+    const caption = document.querySelector('.certificate-caption');
+    const certTitle = document.getElementById('certTitle');
+    const certIssuer = document.getElementById('certIssuer');
+
+    const lightbox = document.getElementById('certLightbox');
+    const lightboxImg = document.getElementById('certLightboxImg');
+    const lightboxClose = document.querySelector('.cert-lightbox-close');
+
+    let centerIndex = Math.floor(cards.length / 2);
+    let autoplayTimer = null;
+    const AUTOPLAY_MS = 5000;
+
+    // Build dots
+    cards.forEach((card, i) => {
+        const dot = document.createElement('span');
+        if (i === centerIndex) dot.classList.add('active');
+        dot.addEventListener('click', () => { goTo(i); restartAutoplay(); });
+        dotsContainer.appendChild(dot);
+    });
+
+    function render() {
+        const total = cards.length;
+
+        cards.forEach((card, i) => {
+            card.classList.remove('cert-pos-center', 'cert-pos-left', 'cert-pos-right');
+
+            let diff = i - centerIndex;
+            if (diff > total / 2) diff -= total;
+            if (diff < -total / 2) diff += total;
+
+            if (diff === 0) {
+                card.classList.add('cert-pos-center');
+            } else if (diff < 0) {
+                card.classList.add('cert-pos-left');
+            } else {
+                card.classList.add('cert-pos-right');
+            }
+        });
+
+        dotsContainer.querySelectorAll('span').forEach((dot, i) => {
+            dot.classList.toggle('active', i === centerIndex);
+        });
+
+        // Update caption with a fade
+        const active = cards[centerIndex];
+        certTitle.textContent = active.dataset.title || '';
+        certIssuer.innerHTML = active.dataset.issuer || '';
+        caption.classList.remove('fade');
+        void caption.offsetWidth; // restart animation
+        caption.classList.add('fade');
+    }
+
+    function goTo(index) {
+        centerIndex = (index + cards.length) % cards.length;
+        render();
+    }
+
+    const next = () => goTo(centerIndex + 1);
+    const prev = () => goTo(centerIndex - 1);
+
+    // Click side card to center it; click center card to open lightbox
+    cards.forEach((card, i) => {
+        card.addEventListener('click', () => {
+            if (i !== centerIndex) {
+                goTo(i);
+                restartAutoplay();
+            } else {
+                openLightbox(card.querySelector('img'));
+            }
+        });
+    });
+
+    if (nextBtn) nextBtn.addEventListener('click', () => { next(); restartAutoplay(); });
+    if (prevBtn) prevBtn.addEventListener('click', () => { prev(); restartAutoplay(); });
+
+    // ===== Lightbox =====
+    function openLightbox(img) {
+        if (!img || !lightbox) return;
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        stopAutoplay();
+    }
+
+    function closeLightbox() {
+        if (!lightbox) return;
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+        startAutoplay();
+    }
+
+    if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+    if (lightbox) {
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+    }
+
+    // ===== Keyboard =====
+    document.addEventListener('keydown', (e) => {
+        if (lightbox && lightbox.classList.contains('open')) {
+            if (e.key === 'Escape') closeLightbox();
+            return;
+        }
+
+        const section = document.getElementById('certificates');
+        if (!section) return;
+        const rect = section.getBoundingClientRect();
+        const inView = rect.top < window.innerHeight && rect.bottom > 0;
+        if (!inView) return;
+
+        if (e.key === 'ArrowLeft') { prev(); restartAutoplay(); }
+        if (e.key === 'ArrowRight') { next(); restartAutoplay(); }
+    });
+
+    // ===== Touch swipe =====
+    let touchStartX = 0;
+    track.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    track.addEventListener('touchend', (e) => {
+        const delta = e.changedTouches[0].screenX - touchStartX;
+        if (Math.abs(delta) > 50) {
+            delta < 0 ? next() : prev();
+            restartAutoplay();
+        }
+    }, { passive: true });
+
+    // ===== Autoplay =====
+    function startAutoplay() {
+        stopAutoplay();
+        autoplayTimer = setInterval(next, AUTOPLAY_MS);
+    }
+
+    function stopAutoplay() {
+        if (autoplayTimer) clearInterval(autoplayTimer);
+        autoplayTimer = null;
+    }
+
+    function restartAutoplay() {
+        startAutoplay();
+    }
+
+    if (carousel) {
+        carousel.addEventListener('mouseenter', stopAutoplay);
+        carousel.addEventListener('mouseleave', startAutoplay);
+    }
+
+    // Only autoplay while the section is on screen
+    const sectionEl = document.getElementById('certificates');
+    if (sectionEl && 'IntersectionObserver' in window) {
+        new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                entry.isIntersecting ? startAutoplay() : stopAutoplay();
+            });
+        }, { threshold: 0.25 }).observe(sectionEl);
+    } else {
+        startAutoplay();
+    }
+
+    render();
+});
+
 // ==================== PROFILE IMAGE FLOATING ANIMATION ====================
 document.addEventListener('DOMContentLoaded', function() {
     const profileImg = document.querySelector('.profile-img');
@@ -370,7 +590,7 @@ if (form) {
                 input.style.animation = 'shake 0.5s ease-in-out';
                 isValid = false;
             } else {
-                input.style.borderColor = '#2563eb';
+                input.style.borderColor = '#7c3aed';
             }
         });
 
@@ -438,11 +658,11 @@ function createScrollProgressBar() {
         top: 0;
         left: 0;
         height: 3px;
-        background: linear-gradient(90deg, #2563eb, #1d4ed8);
+        background: linear-gradient(90deg, #7c3aed, #3b82f6);
         width: 0%;
         z-index: 1000;
         transition: width 0.1s ease;
-        box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+        box-shadow: 0 0 10px rgba(124, 58, 237, 0.6);
     `;
 
     document.body.appendChild(progressBar);
@@ -463,7 +683,7 @@ function createSectionIndicator() {
         top: 50%;
         width: 3px;
         height: 100px;
-        background: linear-gradient(180deg, transparent, rgba(37, 99, 235, 0.6), transparent);
+        background: linear-gradient(180deg, transparent, rgba(124, 58, 237, 0.7), transparent);
         transform: translateY(-50%);
         pointer-events: none;
         z-index: 999;
@@ -491,7 +711,7 @@ function createScrollToTopButton() {
         right: 30px;
         width: 50px;
         height: 50px;
-        background: #2563eb;
+        background: linear-gradient(135deg, #7c3aed, #3b82f6);
         color: white;
         border: none;
         border-radius: 50%;
@@ -502,7 +722,7 @@ function createScrollToTopButton() {
         font-size: 20px;
         z-index: 999;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+        box-shadow: 0 4px 16px rgba(124, 58, 237, 0.5);
     `;
 
     document.body.appendChild(button);
@@ -523,12 +743,12 @@ function createScrollToTopButton() {
     });
 
     button.addEventListener('mouseenter', function() {
-        this.style.background = '#1d4ed8';
+        this.style.boxShadow = '0 6px 22px rgba(124, 58, 237, 0.7)';
         this.style.transform = 'scale(1.1)';
     });
 
     button.addEventListener('mouseleave', function() {
-        this.style.background = '#2563eb';
+        this.style.boxShadow = '0 4px 16px rgba(124, 58, 237, 0.5)';
         this.style.transform = 'scale(1)';
     });
 }

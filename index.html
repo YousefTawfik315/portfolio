@@ -36,6 +36,7 @@
                     <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
                     <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#certificates">Certificates</a></li>
                     <li class="nav-item"><a class="nav-link" href="#more">More</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
@@ -67,7 +68,7 @@
                         Computer Vision, NLP, LLMs, RAG, and Generative AI.
                     </p>
 
-                    <a href="./Yousef_CV.pdf" class="download-btn" download>
+                    <a href="./Yousef.pdf" class="download-btn" download>
                         <i class="bi bi-download"></i>
                         Download Resume
                     </a>
@@ -134,6 +135,9 @@
                             <span>Computer Vision</span>
                             <span>NLP</span>
                             <span>LLMs</span>
+                            <span>Speech-to-Text</span>
+                            <span>Speaker Diarization</span>
+                            <span>Sentiment Analysis</span>
                             <span>Data Mining</span>
                             <span>Big Data</span>
                         </div>
@@ -148,6 +152,8 @@
                             <span>PyTorch</span>
                             <span>Keras</span>
                             <span>Scikit-learn</span>
+                            <span>Transformers</span>
+                            <span>Whisper</span>
                             <span>YOLO</span>
                             <span>OpenCV</span>
                         </div>
@@ -156,10 +162,13 @@
 
                 <div class="col-lg-4 col-md-6">
                     <div class="skill-card">
-                        <h4><i class="bi bi-stars"></i> Generative AI</h4>
+                        <h4><i class="bi bi-stars"></i> Generative AI & LLM Agents</h4>
                         <div class="skill-tags">
+                            <span>LLM Agents</span>
+                            <span>Function Calling</span>
                             <span>RAG</span>
                             <span>FAISS</span>
+                            <span>Vector Search</span>
                             <span>Gemini API</span>
                             <span>Prompt Engineering</span>
                         </div>
@@ -183,8 +192,13 @@
                         <div class="skill-tags">
                             <span>Git</span>
                             <span>GitHub</span>
+                            <span>FastAPI</span>
+                            <span>Docker</span>
+                            <span>Pandas</span>
+                            <span>Web Scraping</span>
                             <span>SQLite</span>
                             <span>REST APIs</span>
+                            <span>Chart.js</span>
                             <span>Google Colab</span>
                             <span>Jupyter</span>
                         </div>
@@ -207,8 +221,8 @@
             </h2>
 
             <p class="section-subtitle">
-                A collection of AI, Computer Vision, NLP, Mobile Development,
-                Robotics, and Business Intelligence projects.
+                A collection of LLM agents, AI, Computer Vision, NLP, Data Analytics,
+                Mobile Development, Robotics, and Business Intelligence projects.
             </p>
 
         </div>
@@ -234,8 +248,39 @@
                     <p>
                         Intelligent bilingual hospital assistant capable of
                         face recognition, patient guidance, voice interaction,
-                        appointment booking and RAG-powered question answering.
+                        appointment booking and RAG-powered question answering,
+                        grounded in a knowledge base covering 70 doctors,
+                        16 departments and 8 branches.
                     </p>
+
+                    <div class="project-kpis">
+
+                        <div class="kpi-item">
+                            <span class="kpi-value">2.23 s</span>
+                            <span class="kpi-label">Average response</span>
+                        </div>
+
+                        <div class="kpi-item">
+                            <span class="kpi-value">100%</span>
+                            <span class="kpi-label">API success rate</span>
+                        </div>
+
+                        <div class="kpi-item">
+                            <span class="kpi-value">9.97%</span>
+                            <span class="kpi-label">Bilingual Whisper WER</span>
+                        </div>
+
+                        <div class="kpi-item">
+                            <span class="kpi-value">&plusmn;0.30 m</span>
+                            <span class="kpi-label">Navigation accuracy</span>
+                        </div>
+
+                        <div class="kpi-item">
+                            <span class="kpi-value">70 / 16 / 8</span>
+                            <span class="kpi-label">Doctors / departments / branches</span>
+                        </div>
+
+                    </div>
 
                     <div class="project-tags">
 
@@ -247,6 +292,204 @@
                         <span>Whisper</span>
 
                     </div>
+
+                </div>
+
+            </div>
+
+            <!-- Smart Sales Assistant -->
+
+            <div class="col-lg-12">
+
+                <div class="project-card">
+
+                    <div class="project-icon">
+                        <i class="bi bi-chat-dots"></i>
+                    </div>
+
+                    <h3>Smart Sales Assistant</h3>
+
+                    <h6 class="project-type">
+                        Bilingual AI Sales Agent • LLM Function Calling
+                    </h6>
+
+                    <p>
+                        Built an LLM agent using a function-calling (tool-use) architecture with
+                        12 custom tools spanning retrieval, category routing, cart management and
+                        order placement — the agent autonomously selects and chains tools per user
+                        message instead of following a fixed script. Engineered grounded retrieval
+                        so every product fact originates from a database tool call, eliminating
+                        hallucinated products and prices.
+                    </p>
+
+                    <p>
+                        Implemented bilingual Arabic/English search with text normalisation,
+                        cross-language synonym expansion and Levenshtein typo correction, plus
+                        FAISS vector search over multilingual embeddings. Enriched a 1,145-product
+                        catalogue through web scraping and exact SKU matching, and built a
+                        provider-agnostic LLM layer (OpenAI / Gemini)
+                        switchable by config. Containerised with Docker.
+                    </p>
+
+                    <div class="project-tags">
+
+                        <span>Python</span>
+                        <span>FastAPI</span>
+                        <span>LLM Agents</span>
+                        <span>Function Calling</span>
+                        <span>RAG</span>
+                        <span>FAISS</span>
+                        <span>SQLite</span>
+                        <span>Docker</span>
+
+                    </div>
+
+                    <button type="button"
+                            class="project-link project-demo-btn"
+                            data-video="./Media1.mp4">
+                        <i class="bi bi-play-circle-fill"></i>
+                        View Example
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- Audio Intelligence Platform -->
+
+            <div class="col-lg-12">
+
+                <div class="project-card">
+
+                    <div class="project-icon">
+                        <i class="bi bi-soundwave"></i>
+                    </div>
+
+                    <h3>Audio Intelligence Platform</h3>
+
+                    <h6 class="project-type">
+                        Arabic Call Analysis &bull; Speech, Diarization &amp; Sentiment
+                    </h6>
+
+                    <p>
+                        Upload an Arabic call recording and get back who spoke, what they said,
+                        how they felt, and a manager's summary — as a web page and a downloadable
+                        PDF. Built a hybrid speech-to-text layer that runs on the OpenAI API by
+                        default and falls back automatically to a local faster-whisper model when
+                        there is no key or the call fails, so the app stays fully functional
+                        offline.
+                    </p>
+
+                    <p>
+                        Orchestrated six models across cloud and local inference — transcription,
+                        pyannote speaker diarization, and an Arabic MARBERT sentiment classifier
+                        that always runs locally so recordings never have to leave the machine.
+                        Added an LLM agent producing structured executive summaries, key points
+                        and action items, plus a manager-facing PDF with correct Arabic letter
+                        joining and right-to-left layout for mixed Arabic/Latin text. Shipped with
+                        a waveform player and play-synced transcript, CI, a credential-scanning
+                        pre-commit hook, and a CPU-only Docker image.
+                    </p>
+
+                    <div class="project-kpis">
+
+                        <div class="kpi-item">
+                            <span class="kpi-value">6 models</span>
+                            <span class="kpi-label">4 running fully local</span>
+                        </div>
+
+                        <div class="kpi-item">
+                            <span class="kpi-value">Hybrid STT</span>
+                            <span class="kpi-label">Cloud-first with automatic local fallback</span>
+                        </div>
+
+                        <div class="kpi-item">
+                            <span class="kpi-value">131</span>
+                            <span class="kpi-label">Regression tests</span>
+                        </div>
+
+                        <div class="kpi-item">
+                            <span class="kpi-value">0.3 s</span>
+                            <span class="kpi-label">Local sentiment inference</span>
+                        </div>
+
+                    </div>
+
+                    <div class="project-tags">
+
+                        <span>Python</span>
+                        <span>FastAPI</span>
+                        <span>Whisper</span>
+                        <span>pyannote</span>
+                        <span>MARBERT</span>
+                        <span>Transformers</span>
+                        <span>Docker</span>
+
+                    </div>
+
+                    <button type="button"
+                            class="project-link project-demo-btn"
+                            data-video="./linkedin.mp4">
+                        <i class="bi bi-play-circle-fill"></i>
+                        View Example
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- Market Intelligence Dashboard -->
+
+            <div class="col-lg-12">
+
+                <div class="project-card">
+
+                    <div class="project-icon">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </div>
+
+                    <h3>Market Intelligence Dashboard</h3>
+
+                    <h6 class="project-type">
+                        Full-Stack Data Analytics Platform
+                    </h6>
+
+                    <p>
+                        End-to-end retail market intelligence dashboard for a cosmetics company,
+                        processing 84,000+ rows of multi-year retail audit data across 14 product
+                        categories and 17 regional and channel markets. Designed an adaptive
+                        segmentation algorithm that automatically detects meaningful sub-category
+                        splits per product line, eliminating hardcoded category logic so the system
+                        scales to any new category without code changes.
+                    </p>
+
+                    <p>
+                        Engineered a FastAPI backend with 10+ REST endpoints delivering real-time
+                        brand, channel, region and SKU-level analytics, including automated
+                        year-over-year growth calculations. Built a fully interactive 6-page
+                        frontend with global filtering by category and period — replacing a static
+                        Excel workflow and cutting analysis of any category/period combination
+                        from a manual multi-step process to a single click.
+                    </p>
+
+                    <div class="project-tags">
+
+                        <span>Python</span>
+                        <span>FastAPI</span>
+                        <span>Pandas</span>
+                        <span>JavaScript</span>
+                        <span>Chart.js</span>
+                        <span>REST APIs</span>
+
+                    </div>
+
+                    <a href="https://lumina-market-intelligence-backend.vercel.app/"
+                       target="_blank"
+                       rel="noopener"
+                       class="project-link">
+                        <i class="bi bi-box-arrow-up-right"></i>
+                        Live Demo
+                    </a>
 
                 </div>
 
@@ -461,6 +704,88 @@
     </div>
 
 </section>
+<!-- ================= Certificates ================= -->
+
+<section id="certificates" class="certificates-section">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <h2 class="section-title">
+                Certificates
+            </h2>
+
+            <p class="section-subtitle">
+                Check out some of my certificates, ranging from
+                internships to specialized technical training.
+            </p>
+
+        </div>
+
+        <div class="certificates-carousel" id="certificatesCarousel">
+
+            <button class="cert-nav cert-nav-prev" aria-label="Previous certificate">
+                <i class="bi bi-chevron-left"></i>
+            </button>
+
+            <div class="certificate-track" id="certificateTrack">
+
+                <div class="certificate-card"
+                     data-title="ITI"
+                     data-issuer="Information Technology Institute &middot; Machine Learning (60 hrs)">
+                    <img src="./images/iti.jpeg" alt="ITI Machine Learning Certificate">
+                    <span class="cert-zoom"><i class="bi bi-arrows-fullscreen"></i></span>
+                </div>
+
+                <div class="certificate-card"
+                     data-title="Summer Internship"
+                     data-issuer="Akhnaton Trading &amp; Distribution &middot; Digital Transformation">
+                    <img src="./images/certificate-internship.jpeg" alt="Akhnaton Trading and Distribution Internship Certificate">
+                    <span class="cert-zoom"><i class="bi bi-arrows-fullscreen"></i></span>
+                </div>
+
+                <div class="certificate-card"
+                     data-title="AMIT"
+                     data-issuer="Master Machine Learning &amp; AI Diploma &middot; Grade 92%">
+                    <img src="./images/Amit.jpeg" alt="AMIT Machine Learning and AI Diploma">
+                    <span class="cert-zoom"><i class="bi bi-arrows-fullscreen"></i></span>
+                </div>
+
+            </div>
+
+            <button class="cert-nav cert-nav-next" aria-label="Next certificate">
+                <i class="bi bi-chevron-right"></i>
+            </button>
+
+        </div>
+
+        <div class="certificate-caption">
+            <h4 id="certTitle"></h4>
+            <p id="certIssuer"></p>
+        </div>
+
+        <div class="certificate-dots" id="certificateDots"></div>
+
+    </div>
+
+</section>
+
+<!-- Certificate Lightbox -->
+<div class="cert-lightbox" id="certLightbox">
+    <button class="cert-lightbox-close" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+    <img src="" alt="Certificate preview" id="certLightboxImg">
+</div>
+
+<!-- Project Demo Video Modal -->
+<div class="video-modal" id="videoModal">
+    <button class="video-modal-close" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+    <div class="video-modal-inner">
+        <video id="demoVideo" controls playsinline preload="metadata">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</div>
 <!-- ================= More ================= -->
 
 <section id="more" class="more-section">
@@ -493,17 +818,17 @@
                     </h3>
 
                     <div class="language-item">
-                        <span>🇪🇬 Arabic</span>
+                        <span> Arabic</span>
                         <small>Native</small>
                     </div>
 
                     <div class="language-item">
-                        <span>🇺🇸 English</span>
+                        <span> English</span>
                         <small>Professional Working Proficiency</small>
                     </div>
 
                     <div class="language-item">
-                        <span>🇩🇪 German</span>
+                        <span> German</span>
                         <small>B1</small>
                     </div>
 
@@ -633,7 +958,7 @@
 
                             <h5>Location</h5>
 
-                            <p>Egypt</p>
+                            <p>Kuwait</p>
 
                         </div>
 
@@ -678,7 +1003,7 @@
 
                     </p>
 
-                    <a href="./Yousef_CV.pdf"
+                    <a href="./Yousef.pdf"
                        download
                        class="download-btn w-100 mb-4">
 
